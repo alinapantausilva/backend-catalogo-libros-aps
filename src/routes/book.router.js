@@ -6,13 +6,15 @@ import {
   updateBook,
   deleteBook,
 } from "../controllers/book.controller.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 router.get("/", getBooks);
 router.get("/:id", getBookById);
-router.post("/", createBook);
-router.put("/:id", updateBook);
-router.delete("/:id", deleteBook);
+
+router.post("/", authMiddleware, createBook);
+router.put("/:id", authMiddleware, updateBook);
+router.delete("/:id", authMiddleware, deleteBook);
 
 export default router;
