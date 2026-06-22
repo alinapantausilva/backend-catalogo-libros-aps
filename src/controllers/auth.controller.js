@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
 export const register = async (req, res) => {
@@ -8,7 +8,7 @@ export const register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(422).json({ message: "El email ya está registrado" });
+      return res.status(400).json({ message: "El correo ya esta registrado" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
