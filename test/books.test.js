@@ -11,7 +11,7 @@ describe("CRUD Books", function () {
   this.timeout(5000);
 
   before(async () => {
-    User.deleteMany();
+    await User.deleteMany();
 
     const hash = await bcrypt.hash("abc.123-", 10);
 
@@ -22,7 +22,7 @@ describe("CRUD Books", function () {
       role: "admin",
     };
 
-    User.create(user);
+    await User.create(user);
   });
 
   test("Debería traer un array de libros", async () => {
